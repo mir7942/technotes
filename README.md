@@ -2,4 +2,4 @@
 이 저장소는 개인적으로 참고하는 자료들을 모아놓은 것입니다.
 
 ## 목록
-- [윈도우즈에서 도커 개발 환경 설정](docker-dev-env/README.md)
+- [윈도우즈에서 WSL 기반 도커 설치](wsl-docker-env/README.md)
