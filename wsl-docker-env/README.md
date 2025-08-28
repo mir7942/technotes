@@ -1,5 +1,5 @@
 # 윈도우즈에서 WSL 기반 Docker 설치
-윈도우즈에서 도커 기반 개발 환경을 설정하는 방법에 대해 설명합니다.
+윈도우즈에서 WSL을 이용해 Docker를 설치하는 방법에 대해 설명합니다.
 
 ## WSL 설치
 참고: [WSL을 사용하여 Windows에 Linux를 설치하는 방법](https://learn.microsoft.com/ko-kr/windows/wsl/install)
