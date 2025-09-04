@@ -1,7 +1,7 @@
 # Docker 명령어 모음
 Docker에서 자주 사용하는 명령어를 설명한다.
 
-# Image 실행
+## Image 실행
 아래 옵션들을 조합할 수 있다.
 - Image를 실행하고 그 Image에서 Command를 실행
 ```powershell
@@ -13,7 +13,7 @@ docker run -it <Image>
 ```
 - Image를 실행하고 종료될 때 Container를 삭제
 ```powershell
-docker run -rm <Image>
+docker run --rm <Image>
 ```
 - Image를 백그라운드 모드로 실행
 ```powershell
@@ -89,4 +89,16 @@ Image를 삭제하기 전에 관련된 모든 Container를 종료해야 한다.
 docker rmi <Image>
 또는
 docker image rm <Image>
+```
+
+## 볼륨 연결
+- Host 볼륨과 Container 볼륨 연결
+```powershell
+docker run -v <Host Directory>:<Container Directory> ...
+```
+
+## 포트 연결
+- Host의 포트와 Container의 포트 연결
+```powershell
+docker run -p <Host Port>:<Container Port> ...
 ```
