@@ -14,3 +14,8 @@ docker pull pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
 ```powershell
 docker run --gpus all -it --rm pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime python -c "import torch; print(torch.cuda.is_available())"
 ```
+
+5. Python을 실행하지 않고 쉘로만 접근하기 위해서는 다음과 같이 한다.
+```powershell
+docker run --name <NAME> --gpus all -it -v ${PWD}:/workspace pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+```
