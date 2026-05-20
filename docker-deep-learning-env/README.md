@@ -19,3 +19,62 @@ docker run --gpus all -it --rm pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime pyt
 ```powershell
 docker run --name <NAME> --gpus all -it -v ${PWD}:/workspace pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
 ```
+
+## Dockerfile 구축
+1. 소스코드가 있는 폴더에 Dockerfile을 만든다.
+```
+FROM pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+
+WORKDIR /workspace
+
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip
+
+CMD ["/bin/bash"]
+```
+
+2. Dockerfile과 같은 위치에 docker-compose.yml 파일을 만든다. 이때, **app**는 서비스 이름, **mp-net**은 컨테이너 이름이다.
+```
+services:
+  app:
+    build: .
+    container_name: mp-net
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    shm_size: "8gb"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+```
+
+3. 다음 명령을 실행하면, 도커 이미지가 만들어진다.
+```powershell
+docker compose build
+```
+
+4. 컨테이너를 실행한다. 이때, **app**는 서비스 이름이다.
+```powershell
+docker compose run app
+```
+
+## Visual Studio Code에서 연결
+1. Dockerfile 파일과 docker-compose.yml 파일이 있는 폴더로 이동한다.
+
+2. 다음 명령을 실행한다. 이는 컨테이너를 백그라운드 모드로 실행한다.
+```powershell
+docker compose up -d
+```
+
+3. Visual Studio Code를 실행한다.
